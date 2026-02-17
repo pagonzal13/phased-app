@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Playfair Display';
+    src: url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+  }
+  
+  @font-face {
+    font-family: 'Cormorant Garamond';
+    src: url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  }
+
+  body {
+    @apply font-sans text-charcoal;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .display-font {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .serif-font {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .container-width {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .gradient-radial {
+    background: radial-gradient(circle at center, #faf9f7 0%, #f5f3ef 100%);
+  }
+
+  .divider {
+    @apply h-px bg-gradient-to-r from-transparent via-gold to-transparent w-32;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply bg-charcoal text-cream px-8 py-3 font-medium tracking-wide uppercase text-sm
+           hover:bg-gold hover:text-charcoal transition-all duration-300 
+           border-2 border-charcoal hover:border-gold;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-charcoal px-8 py-3 font-medium tracking-wide uppercase text-sm
+           border-2 border-charcoal hover:bg-charcoal hover:text-cream transition-all duration-300;
+  }
+
+  .btn-minimal {
+    @apply text-gold hover:text-charcoal transition-colors duration-200 underline;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white border border-soft-gray p-6 shadow-sm;
+  }
+
+  .card-hover {
+    @apply bg-white border border-soft-gray p-6 shadow-sm
+           transition-all duration-300 cursor-pointer
+           hover:shadow-md hover:border-gold;
+  }
+
+  /* Phase badge */
+  .phase-badge {
+    @apply inline-block px-3 py-1 text-xs font-medium bg-gold/10 text-gold border border-gold/30;
+  }
+
+  /* Calendar components */
+  .calendar-grid {
+    @apply grid grid-cols-7 gap-2;
+  }
+
+  .calendar-day {
+    @apply aspect-square border-2 p-2 transition-all cursor-pointer
+           hover:shadow-md text-center flex flex-col items-center justify-center;
+  }
+
+  .calendar-day-today {
+    @apply ring-2 ring-gold ring-offset-2;
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    @apply italic text-sm text-gray-600 bg-cream p-6 border-l-4 border-gold;
+  }
+
+  /* Inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  textarea,
+  select {
+    @apply w-full px-4 py-3 border border-soft-gray bg-white
+           focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold
+           transition-colors;
+  }
+
+  input[type="range"] {
+    @apply w-full h-2 bg-soft-gray rounded-lg appearance-none cursor-pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    @apply appearance-none w-5 h-5 bg-gold rounded-full cursor-pointer hover:bg-charcoal transition-colors;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    @apply w-5 h-5 bg-gold rounded-full cursor-pointer hover:bg-charcoal transition-colors border-0;
+  }
+}
+
+/* Modal styles - COMPLETELY FIXED */
+.modal-overlay {
+  @apply fixed inset-0;
+  background: rgba(43, 43, 43, 0.7);
+  pointer-events: auto;
+}
+
+.modal-content {
+  @apply bg-white p-8 shadow-2xl;
+  position: relative;
+  z-index: 51;
+  pointer-events: auto;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f3ef;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B8985F;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2b2b2b;
+}

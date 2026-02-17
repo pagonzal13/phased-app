@@ -1,0 +1,542 @@
+export const translations = {
+  es: {
+    // Navigation
+    nav: {
+      home: 'Inicio',
+      profiles: 'Perfiles',
+      calendar: 'Calendario',
+      insights: 'Análisis',
+      learn: 'Aprender'
+    },
+    
+    // Landing page
+    landing: {
+      title: 'PHASED',
+      subtitle: 'Gestión premium del ciclo menstrual para profesionales modernas.',
+      description: 'Comprende tus patrones. Optimiza tu rendimiento. Honra tu ritmo.',
+      createProfile: 'Crear Perfil',
+      unlockCalendar: 'Abrir Calendario',
+      howItWorks: 'Cómo Funciona',
+      step1Title: 'Crea un Perfil',
+      step1Desc: 'Responde un breve cuestionario sobre tu ciclo, estilo de vida y preferencias. Establece una contraseña para proteger tus datos.',
+      step2Title: 'Recibe tu Calendario',
+      step2Desc: 'Obtén orientación personalizada día a día sobre estado de ánimo, energía, entrenamiento, capacidad de trabajo y dinámica relacional.',
+      step3Title: 'Registra y Refina',
+      step3Desc: 'Anota tu experiencia real. El sistema adapta las recomendaciones según tus patrones reales, no solo promedios.',
+      whyPhased: 'Por qué PHASED',
+      feature1Title: 'Orientación Día a Día',
+      feature1Desc: 'Información personalizada para cada fase de tu ciclo, adaptada a tu fisiología única.',
+      feature2Title: 'Basado en Ciencia',
+      feature2Desc: 'Construido sobre investigación revisada por pares sobre fluctuaciones hormonales y sus efectos.',
+      feature3Title: 'Recomendaciones Adaptativas',
+      feature3Desc: 'Orientación sobre entrenamiento, trabajo y relaciones que aprende de tu experiencia real.',
+      feature4Title: 'Enfoque Holístico',
+      feature4Desc: 'Más allá del seguimiento: comprende tu energía, estado de ánimo, cognición y necesidades durante todo tu ciclo.',
+      feature5Title: 'Privado y Seguro',
+      feature5Desc: 'Perfiles protegidos con contraseña y almacenamiento encriptado. Tus datos te pertenecen.',
+      feature6Title: 'Exporta Todo',
+      feature6Desc: 'Descarga tus datos en cualquier momento. Control y portabilidad completos.',
+      disclaimer: 'Aviso Médico Importante',
+      disclaimerText1: 'PHASED proporciona información educativa y orientación general basada en investigación sobre fisiología del ciclo menstrual. Esta aplicación no es un dispositivo médico y no proporciona diagnóstico médico, tratamiento o consejo anticonceptivo.',
+      disclaimerText2: 'Todas las recomendaciones usan lenguaje probabilístico porque las experiencias individuales varían significativamente. Tu experiencia real puede diferir de las predicciones.',
+      disclaimerText3: 'Si experimentas síntomas severos (incluyendo pero no limitado a: dolor extremo, sangrado muy abundante, cambios severos de humor o síntomas que interfieren con la vida diaria), consulta a un profesional de la salud. Condiciones como PMDD, endometriosis y SOP requieren atención médica profesional.',
+      footerAbout: 'Gestión del ciclo premium construida con ciencia y respeto por la experiencia individual.',
+      footerPrivacy: 'Privacidad',
+      footerPrivacyText: 'Todos los datos se almacenan localmente en tu dispositivo con respaldo encriptado opcional en la nube. Nunca vendemos ni compartimos tu información personal.',
+      footerSources: 'Fuentes',
+      footerSourcesLink: 'Ver fundamentos teóricos e investigación →'
+    },
+    
+    // Profile page
+    profile: {
+      title: 'Tus Perfiles',
+      subtitle: 'Selecciona un perfil para abrir tu calendario, o crea uno nuevo.',
+      createNew: 'Crear Nuevo Perfil',
+      createNewDesc: 'Comienza de nuevo con un calendario de ciclo nuevo',
+      unlock: 'Abrir Calendario',
+      edit: 'Editar',
+      delete: 'Eliminar',
+      confirmDelete: '¿Estás segura de que quieres eliminar este perfil? Esta acción no se puede deshacer.',
+      nextPeriod: 'Próxima regla en ~',
+      days: 'días',
+      lastUpdated: 'Última actualización',
+      noProfiles: 'Aún no hay perfiles.',
+      createFirst: 'Crea tu primer perfil para comenzar.',
+      dayCycle: 'ciclo de días'
+    },
+    
+    // Password modal
+    password: {
+      enterPassword: 'Introduce Contraseña',
+      profileProtected: 'Este perfil está protegido',
+      confirmDeletion: 'Confirmar Eliminación',
+      confirmDeletionDesc: 'Introduce la contraseña para confirmar la eliminación',
+      editProfile: 'Editar Perfil',
+      editProfileDesc: 'Introduce tu contraseña para continuar',
+      placeholder: 'Introduce contraseña',
+      cancel: 'Cancelar',
+      unlock: 'Abrir',
+      incorrectPassword: 'Contraseña incorrecta'
+    },
+    
+    // Questionnaire
+    questionnaire: {
+      step: 'Paso',
+      of: 'de',
+      back: 'Atrás',
+      continue: 'Continuar',
+      reviewAnswers: 'Revisar Respuestas',
+      
+      // Questions
+      name: '¿Cómo quieres llamar a este perfil?',
+      cycleLength: '¿Cuál es la duración típica de tu ciclo?',
+      bleedingLength: '¿Cuántos días sangras normalmente?',
+      bleedingIntensity: '¿Cómo describirías tu flujo?',
+      bleedingLight: 'Ligero',
+      bleedingLightDesc: 'Flujo mínimo, protección ligera necesaria',
+      bleedingMedium: 'Moderado',
+      bleedingMediumDesc: 'Flujo moderado, protección regular',
+      bleedingHeavy: 'Abundante',
+      bleedingHeavyDesc: 'Flujo abundante, cambios frecuentes necesarios',
+      
+      pmsIntensity: '¿Experimentas normalmente síntomas de SPM?',
+      pmsNone: 'Ninguno',
+      pmsNoneDesc: 'Rara vez noto cambios premenstruales',
+      pmsMild: 'Leve',
+      pmsMildDesc: 'Cambios sutiles, manejables',
+      pmsModerate: 'Moderado',
+      pmsModerateDesc: 'Síntomas notables que afectan la vida diaria',
+      pmsStrong: 'Fuerte',
+      pmsStrongDesc: 'Impacto significativo en humor y función',
+      
+      ovulationSigns: '¿Sigues las señales de ovulación?',
+      ovulationYes: 'Sí',
+      ovulationYesDesc: 'Noto moco cervical, temperatura o dolor',
+      ovulationNo: 'No',
+      ovulationNoDesc: 'No sigo o noto estas señales',
+      
+      averageSleep: '¿Cuántas horas sueles dormir?',
+      sleepQuality: '¿Cómo calificarías la calidad de tu sueño?',
+      sleepPoor: 'Malo',
+      sleepFair: 'Regular',
+      sleepGood: 'Bueno',
+      sleepExcellent: 'Excelente',
+      
+      stressLevel: '¿Cuál es tu nivel de estrés típico?',
+      stressLow: 'Bajo',
+      stressLowDesc: 'Generalmente calmada y equilibrada',
+      stressMedium: 'Medio',
+      stressMediumDesc: 'Estrés diario moderado',
+      stressHigh: 'Alto',
+      stressHighDesc: 'Estrés alto consistente',
+      
+      trainingPreference: '¿Qué tipo de entrenamiento prefieres?',
+      trainingCardio: 'Cardio',
+      trainingCardioDesc: 'Correr, ciclismo, natación',
+      trainingStrength: 'Fuerza',
+      trainingStrengthDesc: 'Entrenamiento con pesas, resistencia',
+      trainingMixed: 'Mixto',
+      trainingMixedDesc: 'Combinación de ambos',
+      trainingMinimal: 'Mínimo',
+      trainingMinimalDesc: 'Actividad ligera, caminar, yoga',
+      
+      trainingFrequency: '¿Cuántos días por semana entrenas?',
+      daysPerWeek: 'días/semana',
+      
+      heatSensitive: '¿Eres sensible al calor durante el entrenamiento?',
+      heatYes: 'Sí',
+      heatYesDesc: 'Me sobrecaliento fácilmente durante entrenamientos',
+      heatNo: 'No',
+      heatNoDesc: 'El calor no me afecta mucho',
+      
+      symptoms: '¿Qué síntomas experimentas comúnmente? (Selecciona todos los que apliquen)',
+      symptomCramps: 'Calambres',
+      symptomBloating: 'Hinchazón',
+      symptomAcne: 'Acné o cambios en la piel',
+      symptomHeadache: 'Dolor de cabeza o migraña',
+      symptomBreastTenderness: 'Sensibilidad en los senos',
+      symptomDigestive: 'Problemas digestivos',
+      symptomAnxiety: 'Ansiedad o irritabilidad',
+      symptomLowMood: 'Bajo estado de ánimo o rumiación',
+      symptomLibido: 'Fluctuación de libido',
+      
+      lastPeriod: '¿Cuándo comenzó tu última regla?',
+      lastPeriodExact: 'Fecha exacta',
+      selectDate: 'Seleccionar fecha',
+      
+      protectProfile: 'Protege tu Perfil',
+      protectProfileDesc: 'Crea una contraseña para asegurar tus datos. La necesitarás para acceder a tu calendario.',
+      passwordLabel: 'Contraseña (mín. 8 caracteres)',
+      confirmPasswordLabel: 'Confirmar Contraseña',
+      createProfile: 'Crear Perfil',
+      
+      errors: {
+        required: 'Por favor responde esta pregunta antes de continuar',
+        passwordLength: 'La contraseña debe tener al menos 8 caracteres',
+        passwordMatch: 'Las contraseñas no coinciden',
+        createFailed: 'No se pudo crear el perfil. Inténtalo de nuevo.'
+      }
+    },
+    
+    // Calendar
+    calendar: {
+      title: 'Calendario',
+      day: 'Día',
+      grid: 'Rejilla',
+      timeline: 'Línea de Tiempo',
+      today: 'Hoy',
+      phases: {
+        menstrual: 'Menstrual',
+        follicular: 'Folicular',
+        ovulatory: 'Ovulatoria',
+        luteal: 'Lútea',
+        premenstrual: 'Premenstrual'
+      },
+      energy: 'Energía',
+      mood: 'Estado de ánimo',
+      logDay: 'Registrar Este Día',
+      dayDetails: 'Detalles del Día',
+      yourEnergyMapToday: 'Tu mapa de energía hoy',
+      physicalEnergy: 'Energía Física',
+      socialEnergy: 'Energía Social',
+      emotionalState: 'Estado Emocional',
+      cognition: 'Cognición',
+      selfPerception: 'Autopercepción',
+      libido: 'Libido',
+      training: 'Recomendaciones de Entrenamiento',
+      ifHighEnergy: 'Si la energía es alta',
+      ifLowEnergy: 'Si la energía es baja',
+      work: 'Capacidad de Trabajo',
+      idealFor: 'Ideal para',
+      avoidIfPossible: 'Evitar si es posible',
+      relationships: 'Relaciones',
+      youMightNeed: 'Podrías necesitar',
+      communicationStyle: 'Estilo de comunicación',
+      beAwareOf: 'Ten en Cuenta',
+      disclaimer: 'Esta orientación se basa en patrones hormonales promedio y la configuración de tu perfil. Tu experiencia real puede variar. Registra cómo te sientes para personalizar estas recomendaciones.',
+      monday: 'Lun',
+      tuesday: 'Mar',
+      wednesday: 'Mié',
+      thursday: 'Jue',
+      friday: 'Vie',
+      saturday: 'Sáb',
+      sunday: 'Dom',
+      january: 'Enero',
+      february: 'Febrero',
+      march: 'Marzo',
+      april: 'Abril',
+      may: 'Mayo',
+      june: 'Junio',
+      july: 'Julio',
+      august: 'Agosto',
+      september: 'Septiembre',
+      october: 'Octubre',
+      november: 'Noviembre',
+      december: 'Diciembre'
+    },
+    
+    // Day logging
+    logging: {
+      title: 'Registrar Día',
+      moodLabel: 'Estado de ánimo (1-10)',
+      energyLabel: 'Energía (1-10)',
+      sleepHours: 'Horas de sueño',
+      sleepQuality: 'Calidad del sueño',
+      stressLevel: 'Nivel de estrés (1-10)',
+      symptoms: 'Síntomas',
+      training: 'Entrenamiento realizado',
+      trainingType: 'Tipo',
+      trainingIntensity: 'Intensidad',
+      notes: 'Notas personales',
+      customSymptoms: 'Síntomas adicionales',
+      save: 'Guardar Registro',
+      cancel: 'Cancelar'
+    },
+    
+    // Common
+    common: {
+      of: 'de',
+      hours: 'horas',
+      days: 'días',
+      close: 'Cerrar',
+      save: 'Guardar',
+      cancel: 'Cancelar',
+      delete: 'Eliminar',
+      edit: 'Editar',
+      export: 'Exportar',
+      loading: 'Cargando...'
+    }
+  },
+  
+  en: {
+    // Navigation
+    nav: {
+      home: 'Home',
+      profiles: 'Profiles',
+      calendar: 'Calendar',
+      insights: 'Insights',
+      learn: 'Learn'
+    },
+    
+    // Landing page
+    landing: {
+      title: 'PHASED',
+      subtitle: 'Premium menstrual cycle management for modern professionals.',
+      description: 'Understand your patterns. Optimize your performance. Honor your rhythm.',
+      createProfile: 'Create Profile',
+      unlockCalendar: 'Unlock Calendar',
+      howItWorks: 'How It Works',
+      step1Title: 'Create a Profile',
+      step1Desc: 'Answer a brief, elegant questionnaire about your cycle, lifestyle, and preferences. Set a password to protect your data.',
+      step2Title: 'Receive Your Calendar',
+      step2Desc: 'Get personalized day-by-day guidance on mood, energy, training, work capacity, and relationship dynamics.',
+      step3Title: 'Track & Refine',
+      step3Desc: 'Log your actual experience. The system adapts recommendations based on your real patterns, not just averages.',
+      whyPhased: 'Why PHASED',
+      feature1Title: 'Day-by-Day Guidance',
+      feature1Desc: 'Personalized insights for every phase of your cycle, mapped to your unique physiology.',
+      feature2Title: 'Science-Based',
+      feature2Desc: 'Built on peer-reviewed research about hormonal fluctuations and their effects.',
+      feature3Title: 'Adaptive Recommendations',
+      feature3Desc: 'Training, work, and relationship guidance that learns from your actual experience.',
+      feature4Title: 'Holistic Approach',
+      feature4Desc: 'Beyond tracking — understand your energy, mood, cognition, and needs throughout your cycle.',
+      feature5Title: 'Private & Secure',
+      feature5Desc: 'Password-protected profiles with encrypted storage. Your data belongs to you.',
+      feature6Title: 'Export Everything',
+      feature6Desc: 'Download your data anytime. Complete control and portability.',
+      disclaimer: 'Important Medical Disclaimer',
+      disclaimerText1: 'PHASED provides educational information and general guidance based on menstrual cycle physiology research. This application is not a medical device and does not provide medical diagnosis, treatment, or contraceptive advice.',
+      disclaimerText2: 'All recommendations use probabilistic language because individual experiences vary significantly. Your actual experience may differ from predictions.',
+      disclaimerText3: 'If you experience severe symptoms (including but not limited to: extreme pain, very heavy bleeding, severe mood changes, or symptoms that interfere with daily life), please consult a healthcare provider. Conditions like PMDD, endometriosis, and PCOS require professional medical care.',
+      footerAbout: 'Premium cycle management built with science and respect for individual experience.',
+      footerPrivacy: 'Privacy',
+      footerPrivacyText: 'All data is stored locally on your device with optional encrypted cloud backup. We never sell or share your personal information.',
+      footerSources: 'Sources',
+      footerSourcesLink: 'View theoretical foundation & research →'
+    },
+    
+    // Profile page
+    profile: {
+      title: 'Your Profiles',
+      subtitle: 'Select a profile to unlock your calendar, or create a new one.',
+      createNew: 'Create New Profile',
+      createNewDesc: 'Start fresh with a new cycle calendar',
+      unlock: 'Unlock Calendar',
+      edit: 'Edit',
+      delete: 'Delete',
+      confirmDelete: 'Are you sure you want to delete this profile? This action cannot be undone.',
+      nextPeriod: 'Next period in ~',
+      days: 'days',
+      lastUpdated: 'Last updated',
+      noProfiles: 'No profiles yet.',
+      createFirst: 'Create your first profile to get started.',
+      dayCycle: 'day cycle'
+    },
+    
+    // Password modal
+    password: {
+      enterPassword: 'Enter Password',
+      profileProtected: 'This profile is protected',
+      confirmDeletion: 'Confirm Deletion',
+      confirmDeletionDesc: 'Enter password to confirm deletion',
+      editProfile: 'Edit Profile',
+      editProfileDesc: 'Enter your password to continue',
+      placeholder: 'Enter password',
+      cancel: 'Cancel',
+      unlock: 'Unlock',
+      incorrectPassword: 'Incorrect password'
+    },
+    
+    // Questionnaire
+    questionnaire: {
+      step: 'Step',
+      of: 'of',
+      back: 'Back',
+      continue: 'Continue',
+      reviewAnswers: 'Review Answers',
+      
+      // Questions
+      name: 'What would you like to call this profile?',
+      cycleLength: 'What is your typical cycle length?',
+      bleedingLength: 'How many days do you typically bleed?',
+      bleedingIntensity: 'How would you describe your flow?',
+      bleedingLight: 'Light',
+      bleedingLightDesc: 'Minimal flow, light protection needed',
+      bleedingMedium: 'Medium',
+      bleedingMediumDesc: 'Moderate flow, regular protection',
+      bleedingHeavy: 'Heavy',
+      bleedingHeavyDesc: 'Heavy flow, frequent changes needed',
+      
+      pmsIntensity: 'Do you typically experience PMS symptoms?',
+      pmsNone: 'None',
+      pmsNoneDesc: 'Rarely notice premenstrual changes',
+      pmsMild: 'Mild',
+      pmsMildDesc: 'Subtle changes, manageable',
+      pmsModerate: 'Moderate',
+      pmsModerateDesc: 'Noticeable symptoms that affect daily life',
+      pmsStrong: 'Strong',
+      pmsStrongDesc: 'Significant impact on mood and function',
+      
+      ovulationSigns: 'Do you track ovulation signs?',
+      ovulationYes: 'Yes',
+      ovulationYesDesc: 'I notice cervical mucus, temperature, or pain',
+      ovulationNo: 'No',
+      ovulationNoDesc: 'I don\'t track or notice these signs',
+      
+      averageSleep: 'How many hours do you typically sleep?',
+      sleepQuality: 'How would you rate your sleep quality?',
+      sleepPoor: 'Poor',
+      sleepFair: 'Fair',
+      sleepGood: 'Good',
+      sleepExcellent: 'Excellent',
+      
+      stressLevel: 'What is your typical stress level?',
+      stressLow: 'Low',
+      stressLowDesc: 'Generally calm and balanced',
+      stressMedium: 'Medium',
+      stressMediumDesc: 'Moderate daily stress',
+      stressHigh: 'High',
+      stressHighDesc: 'Consistently high stress',
+      
+      trainingPreference: 'What type of training do you prefer?',
+      trainingCardio: 'Cardio',
+      trainingCardioDesc: 'Running, cycling, swimming',
+      trainingStrength: 'Strength',
+      trainingStrengthDesc: 'Weight training, resistance work',
+      trainingMixed: 'Mixed',
+      trainingMixedDesc: 'Combination of both',
+      trainingMinimal: 'Minimal',
+      trainingMinimalDesc: 'Light activity, walking, yoga',
+      
+      trainingFrequency: 'How many days per week do you train?',
+      daysPerWeek: 'days/week',
+      
+      heatSensitive: 'Are you sensitive to heat during training?',
+      heatYes: 'Yes',
+      heatYesDesc: 'I overheat easily during workouts',
+      heatNo: 'No',
+      heatNoDesc: 'Heat doesn\'t affect me much',
+      
+      symptoms: 'Which symptoms do you commonly experience? (Select all that apply)',
+      symptomCramps: 'Cramps',
+      symptomBloating: 'Bloating',
+      symptomAcne: 'Acne or skin changes',
+      symptomHeadache: 'Headache or migraine',
+      symptomBreastTenderness: 'Breast tenderness',
+      symptomDigestive: 'Digestive issues',
+      symptomAnxiety: 'Anxiety or irritability',
+      symptomLowMood: 'Low mood or rumination',
+      symptomLibido: 'Libido fluctuation',
+      
+      lastPeriod: 'When did your last period start?',
+      lastPeriodExact: 'Exact date',
+      selectDate: 'Select date',
+      
+      protectProfile: 'Protect Your Profile',
+      protectProfileDesc: 'Create a password to secure your data. You\'ll need this to access your calendar.',
+      passwordLabel: 'Password (min. 8 characters)',
+      confirmPasswordLabel: 'Confirm Password',
+      createProfile: 'Create Profile',
+      
+      errors: {
+        required: 'Please answer this question before continuing',
+        passwordLength: 'Password must be at least 8 characters',
+        passwordMatch: 'Passwords do not match',
+        createFailed: 'Failed to create profile. Please try again.'
+      }
+    },
+    
+    // Calendar
+    calendar: {
+      title: 'Calendar',
+      day: 'Day',
+      grid: 'Grid',
+      timeline: 'Timeline',
+      today: 'Today',
+      phases: {
+        menstrual: 'Menstrual',
+        follicular: 'Follicular',
+        ovulatory: 'Ovulatory',
+        luteal: 'Luteal',
+        premenstrual: 'Premenstrual'
+      },
+      energy: 'Energy',
+      mood: 'Mood',
+      logDay: 'Log This Day',
+      dayDetails: 'Day Details',
+      yourEnergyMapToday: 'Your energy map today',
+      physicalEnergy: 'Physical Energy',
+      socialEnergy: 'Social Energy',
+      emotionalState: 'Emotional State',
+      cognition: 'Cognition',
+      selfPerception: 'Self-Perception',
+      libido: 'Libido',
+      training: 'Training Recommendations',
+      ifHighEnergy: 'If energy is high',
+      ifLowEnergy: 'If energy is low',
+      work: 'Work Capacity',
+      idealFor: 'Ideal for',
+      avoidIfPossible: 'Avoid if possible',
+      relationships: 'Relationships',
+      youMightNeed: 'You might need',
+      communicationStyle: 'Communication style',
+      beAwareOf: 'Be Aware Of',
+      disclaimer: 'This guidance is based on average hormonal patterns and your profile settings. Your actual experience may vary. Track how you feel to personalize these recommendations.',
+      monday: 'Mon',
+      tuesday: 'Tue',
+      wednesday: 'Wed',
+      thursday: 'Thu',
+      friday: 'Fri',
+      saturday: 'Sat',
+      sunday: 'Sun',
+      january: 'January',
+      february: 'February',
+      march: 'March',
+      april: 'April',
+      may: 'May',
+      june: 'June',
+      july: 'July',
+      august: 'August',
+      september: 'September',
+      october: 'October',
+      november: 'November',
+      december: 'December'
+    },
+    
+    // Day logging
+    logging: {
+      title: 'Log Day',
+      moodLabel: 'Mood (1-10)',
+      energyLabel: 'Energy (1-10)',
+      sleepHours: 'Sleep hours',
+      sleepQuality: 'Sleep quality',
+      stressLevel: 'Stress level (1-10)',
+      symptoms: 'Symptoms',
+      training: 'Training done',
+      trainingType: 'Type',
+      trainingIntensity: 'Intensity',
+      notes: 'Personal notes',
+      customSymptoms: 'Additional symptoms',
+      save: 'Save Log',
+      cancel: 'Cancel'
+    },
+    
+    // Common
+    common: {
+      of: 'of',
+      hours: 'hours',
+      days: 'days',
+      close: 'Close',
+      save: 'Save',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      edit: 'Edit',
+      export: 'Export',
+      loading: 'Loading...'
+    }
+  }
+};
+
+export type Language = 'es' | 'en';
+export type TranslationKey = keyof typeof translations.es;
