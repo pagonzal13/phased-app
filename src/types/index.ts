@@ -49,9 +49,12 @@ export interface CycleDay {
 }
 
 export interface PhaseInfo {
-  name: 'menstrual_early' | 'follicular_mid' | 'follicular_high' | 'ovulatory' | 'luteal_early' | 'luteal_mid' | 'luteal_late';
+  name: string;
   displayName: string;
-  range: string; // e.g., "O-14 to O-10"
+  range: string;
+  isBleeding?: boolean;
+  isFertile?: boolean;
+  isOvulation?: boolean;
 }
 
 export interface DayPredictions {

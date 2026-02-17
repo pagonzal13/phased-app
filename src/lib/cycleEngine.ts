@@ -26,58 +26,99 @@ export class CycleEngine {
   }
 
   /**
-   * Get phase information for a given relative day
+   * Get phase information for a given cycle day and bleeding length
+   * @param cycleDay - Day of cycle (1-based)
+   * @param cycleLength - Total cycle length
+   * @param bleedingLength - Number of bleeding days
    */
-  static getPhase(relativeDay: number): PhaseInfo {
-    if (relativeDay >= -14 && relativeDay <= -10) {
+  static getPhase(cycleDay: number, cycleLength: number, bleedingLength: number): PhaseInfo {
+    const ovulationDay = this.calculateOvulationDay(cycleLength);
+    
+    // MENSTRUAL PHASE: Days 1 to bleedingLength
+    if (cycleDay >= 1 && cycleDay <= bleedingLength) {
       return {
         name: 'menstrual_early',
-        displayName: 'Menstrual / Early Follicular',
-        range: 'O-14 to O-10'
-      };
-    } else if (relativeDay >= -9 && relativeDay <= -6) {
-      return {
-        name: 'follicular_mid',
-        displayName: 'Mid Follicular',
-        range: 'O-9 to O-6'
-      };
-    } else if (relativeDay >= -5 && relativeDay <= -3) {
-      return {
-        name: 'follicular_high',
-        displayName: 'High Follicular',
-        range: 'O-5 to O-3'
-      };
-    } else if (relativeDay >= -2 && relativeDay <= 1) {
-      return {
-        name: 'ovulatory',
-        displayName: 'Ovulatory Window',
-        range: 'O-2 to O+1'
-      };
-    } else if (relativeDay >= 2 && relativeDay <= 7) {
-      return {
-        name: 'luteal_early',
-        displayName: 'Early Luteal',
-        range: 'O+2 to O+7'
-      };
-    } else if (relativeDay >= 8 && relativeDay <= 10) {
-      return {
-        name: 'luteal_mid',
-        displayName: 'Mid Luteal',
-        range: 'O+8 to O+10'
-      };
-    } else if (relativeDay >= 11 && relativeDay <= 13) {
-      return {
-        name: 'luteal_late',
-        displayName: 'Late Luteal / Premenstrual',
-        range: 'O+11 to O+13'
+        displayName: 'Menstrual',
+        range: `Day 1-${bleedingLength}`,
+        isBleeding: true
       };
     }
     
-    // Fallback for edge cases
+    // EARLY FOLLICULAR: After bleeding until mid-follicular
+    // Usually days after bleeding to about ovulation-9
+    const earlyFollicularEnd = Math.max(bleedingLength + 1, ovulationDay - 9);
+    if (cycleDay > bleedingLength && cycleDay <= earlyFollicularEnd) {
+      return {
+        name: 'follicular_mid',
+        displayName: 'Early Follicular',
+        range: `Day ${bleedingLength + 1}-${earlyFollicularEnd}`,
+        isBleeding: false
+      };
+    }
+    
+    // MID FOLLICULAR: About O-9 to O-6
+    const midFollicularEnd = ovulationDay - 6;
+    if (cycleDay > earlyFollicularEnd && cycleDay <= midFollicularEnd) {
+      return {
+        name: 'follicular_mid',
+        displayName: 'Mid Follicular',
+        range: `Day ${earlyFollicularEnd + 1}-${midFollicularEnd}`,
+        isBleeding: false
+      };
+    }
+    
+    // HIGH FOLLICULAR: O-5 to O-3
+    const highFollicularEnd = ovulationDay - 3;
+    if (cycleDay > midFollicularEnd && cycleDay <= highFollicularEnd) {
+      return {
+        name: 'follicular_high',
+        displayName: 'High Follicular',
+        range: `Day ${midFollicularEnd + 1}-${highFollicularEnd}`,
+        isBleeding: false
+      };
+    }
+    
+    // FERTILE WINDOW / OVULATORY: O-2 to O+1
+    const fertileWindowEnd = ovulationDay + 1;
+    if (cycleDay > highFollicularEnd && cycleDay <= fertileWindowEnd) {
+      return {
+        name: 'ovulatory',
+        displayName: 'Ovulatory',
+        range: `Day ${highFollicularEnd + 1}-${fertileWindowEnd}`,
+        isBleeding: false,
+        isFertile: true,
+        isOvulation: cycleDay === ovulationDay
+      };
+    }
+    
+    // EARLY LUTEAL: O+2 to O+7
+    const earlyLutealEnd = ovulationDay + 7;
+    if (cycleDay > fertileWindowEnd && cycleDay <= earlyLutealEnd) {
+      return {
+        name: 'luteal_early',
+        displayName: 'Early Luteal',
+        range: `Day ${fertileWindowEnd + 1}-${earlyLutealEnd}`,
+        isBleeding: false
+      };
+    }
+    
+    // MID LUTEAL: O+8 to O+10
+    const midLutealEnd = ovulationDay + 10;
+    if (cycleDay > earlyLutealEnd && cycleDay <= midLutealEnd) {
+      return {
+        name: 'luteal_mid',
+        displayName: 'Mid Luteal',
+        range: `Day ${earlyLutealEnd + 1}-${midLutealEnd}`,
+        isBleeding: false
+      };
+    }
+    
+    // LATE LUTEAL / PREMENSTRUAL: Rest of cycle
     return {
-      name: 'menstrual_early',
-      displayName: 'Transitional',
-      range: 'Edge of cycle'
+      name: 'luteal_late',
+      displayName: 'Late Luteal / Premenstrual',
+      range: `Day ${midLutealEnd + 1}-${cycleLength}`,
+      isBleeding: false
     };
   }
 

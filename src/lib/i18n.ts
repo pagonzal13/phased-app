@@ -236,7 +236,12 @@ export const translations = {
       familyTips: 'Tips para Familia y Amigos',
       copyTips: 'Copiar tips',
       tipsCopied: '¡Tips copiados!',
-      shareWith: 'Comparte estos tips con tu pareja, familia o convivientes'
+      shareWith: 'Comparte estos tips con tu pareja, familia o convivientes',
+      showFertileDays: 'Mostrar días fértiles',
+      hideFertileDays: 'Ocultar días fértiles',
+      periodStart: 'Inicio de regla',
+      ovulationDay: 'Día de ovulación',
+      fertileWindow: 'Ventana fértil'
     },
     
     // Day logging
@@ -509,7 +514,12 @@ export const translations = {
       familyTips: 'Tips for Family & Friends',
       copyTips: 'Copy tips',
       tipsCopied: 'Tips copied!',
-      shareWith: 'Share these tips with your partner, family or housemates'
+      shareWith: 'Share these tips with your partner, family or housemates',
+      showFertileDays: 'Show fertile days',
+      hideFertileDays: 'Hide fertile days',
+      periodStart: 'Period starts',
+      ovulationDay: 'Ovulation day',
+      fertileWindow: 'Fertile window'
     },
     
     // Day logging

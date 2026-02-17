@@ -141,8 +141,8 @@ export class ProfileService {
       const date = new Date(cycleStart);
       date.setDate(date.getDate() + day - 1);
 
+      const phase = CycleEngine.getPhase(day, profile.cycleLength, profile.bleedingLength);
       const relativeDay = CycleEngine.calculateRelativeDay(day, profile.cycleLength);
-      const phase = CycleEngine.getPhase(relativeDay);
       
       // Get recent logs for adaptive predictions
       const recentLogs = logs.filter(log => {

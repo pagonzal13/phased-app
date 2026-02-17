@@ -30,6 +30,7 @@ export default function CalendarPage() {
   const [newPeriodDate, setNewPeriodDate] = useState('');
   const [modalView, setModalView] = useState<'details' | 'log'>('details');
   const [showCopiedTooltip, setShowCopiedTooltip] = useState(false);
+  const [showFertileDays, setShowFertileDays] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   // Log form states
@@ -247,6 +248,13 @@ export default function CalendarPage() {
                 >
                   {t('calendar.familyTips')}
                 </button>
+                <button
+                  onClick={() => setShowFertileDays(!showFertileDays)}
+                  className="btn-secondary flex items-center gap-2"
+                  title={showFertileDays ? t('calendar.hideFertileDays') : t('calendar.showFertileDays')}
+                >
+                  {showFertileDays ? '🌸' : '🌸'} {showFertileDays ? t('calendar.hideFertileDays') : t('calendar.showFertileDays')}
+                </button>
               </div>
             </div>
 
@@ -308,6 +316,9 @@ export default function CalendarPage() {
                   const cycleDay = getCycleDayForDate(date);
                   const isCurrentMonth = date.getMonth() === currentMonth.getMonth();
                   const isToday = format(date, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd');
+                  const isPeriodStart = cycleDay?.phase.isBleeding && cycleDay.cycleDay === 1;
+                  const isOvulationDay = showFertileDays && cycleDay?.phase.isOvulation;
+                  const isFertileWindow = showFertileDays && cycleDay?.phase.isFertile;
                   
                   if (!cycleDay || !isCurrentMonth) {
                     return (
@@ -354,6 +365,21 @@ export default function CalendarPage() {
                           <Circle className="w-2 h-2 fill-gold text-gold" />
                         </div>
                       )}
+                      {isPeriodStart && (
+                        <div className="absolute top-1 left-1">
+                          <div className="w-2 h-2 bg-red-600 rounded-full" title={t('calendar.periodStart')}></div>
+                        </div>
+                      )}
+                      {isOvulationDay && (
+                        <div className="absolute bottom-1 right-1">
+                          <span className="text-xs" title={t('calendar.ovulationDay')}>🥚</span>
+                        </div>
+                      )}
+                      {isFertileWindow && !isOvulationDay && (
+                        <div className="absolute bottom-1 left-1">
+                          <span className="text-xs opacity-60" title={t('calendar.fertileWindow')}>🌸</span>
+                        </div>
+                      )}
                     </motion.button>
                   );
                 })}
@@ -398,6 +424,21 @@ export default function CalendarPage() {
                         </div>
                         <div className="text-xs text-gray-600 mt-1">
                           {language === 'es' ? 'Día' : 'Day'} {day.cycleDay} {language === 'es' ? 'del ciclo' : 'of cycle'}
+                          {day.phase.isBleeding && day.cycleDay === 1 && (
+                            <div className="text-xs text-red-600 font-bold mt-1">
+                              🔴 {t('calendar.periodStart')}
+                            </div>
+                          )}
+                          {showFertileDays && day.phase.isOvulation && (
+                            <div className="text-xs text-purple-600 font-bold mt-1">
+                              🥚 {t('calendar.ovulationDay')}
+                            </div>
+                          )}
+                          {showFertileDays && day.phase.isFertile && !day.phase.isOvulation && (
+                            <div className="text-xs text-pink-600 mt-1">
+                              🌸 {t('calendar.fertileWindow')}
+                            </div>
+                          )}
                         </div>
                         {isToday && (
                           <div className="text-xs text-gold mt-1 font-bold uppercase">
