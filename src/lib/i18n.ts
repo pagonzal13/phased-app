@@ -232,7 +232,11 @@ export const translations = {
       september: 'Septiembre',
       october: 'Octubre',
       november: 'Noviembre',
-      december: 'Diciembre'
+      december: 'Diciembre',
+      familyTips: 'Tips para Familia y Amigos',
+      copyTips: 'Copiar tips',
+      tipsCopied: '¡Tips copiados!',
+      shareWith: 'Comparte estos tips con tu pareja, familia o convivientes'
     },
     
     // Day logging
@@ -501,7 +505,11 @@ export const translations = {
       september: 'September',
       october: 'October',
       november: 'November',
-      december: 'December'
+      december: 'December',
+      familyTips: 'Tips for Family & Friends',
+      copyTips: 'Copy tips',
+      tipsCopied: 'Tips copied!',
+      shareWith: 'Share these tips with your partner, family or housemates'
     },
     
     // Day logging

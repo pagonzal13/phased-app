@@ -13,6 +13,7 @@ import { CycleEngine } from '@/lib/cycleEngine';
 import { CycleDay, Profile, DayLog } from '@/types';
 import { useLanguage } from '@/components/LanguageProvider';
 import { getPhaseIcon, getMoodIcon, getSymptomIcon } from '@/lib/icons';
+import { getFamilyTips } from '@/data/familyTips';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
 export default function CalendarPage() {
@@ -24,10 +25,11 @@ export default function CalendarPage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [calendar, setCalendar] = useState<CycleDay[]>([]);
   const [selectedDay, setSelectedDay] = useState<CycleDay | null>(null);
-  const [viewMode, setViewMode] = useState<'grid' | 'timeline'>('grid');
+  const [viewMode, setViewMode] = useState<'grid' | 'timeline' | 'family'>('grid');
   const [showUpdatePeriod, setShowUpdatePeriod] = useState(false);
   const [newPeriodDate, setNewPeriodDate] = useState('');
   const [modalView, setModalView] = useState<'details' | 'log'>('details');
+  const [showCopiedTooltip, setShowCopiedTooltip] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   // Log form states
@@ -120,6 +122,18 @@ export default function CalendarPage() {
     setSelectedSymptoms([]);
     setCustomSymptoms('');
     setNotes('');
+  };
+
+  const handleCopyTips = (tips: any[]) => {
+    const tipsText = tips.map((tip, i) => 
+      `${i + 1}. ${tip.icon} ${tip.title}\n${tip.tip}`
+    ).join('\n\n');
+    
+    const fullText = `${t('calendar.familyTips')}\n\n${tipsText}\n\n---\n${t('calendar.shareWith')}`;
+    
+    navigator.clipboard.writeText(fullText);
+    setShowCopiedTooltip(true);
+    setTimeout(() => setShowCopiedTooltip(false), 2000);
   };
 
   if (!profile || calendar.length === 0) {
@@ -226,6 +240,12 @@ export default function CalendarPage() {
                   className={`px-4 py-2 ${viewMode === 'timeline' ? 'btn-primary' : 'btn-secondary'}`}
                 >
                   {t('calendar.timeline')}
+                </button>
+                <button
+                  onClick={() => setViewMode('family')}
+                  className={`px-4 py-2 ${viewMode === 'family' ? 'btn-primary' : 'btn-secondary'}`}
+                >
+                  {t('calendar.familyTips')}
                 </button>
               </div>
             </div>
@@ -412,6 +432,101 @@ export default function CalendarPage() {
                   </motion.div>
                 );
               })}
+            </div>
+          )}
+
+          {viewMode === 'family' && (
+            <div className="max-w-3xl mx-auto">
+              <div className="card p-8 mb-6 bg-gradient-to-br from-pink-50 to-purple-50 border-2 border-pink-200">
+                <h2 className="text-3xl font-bold mb-4 text-center display-font">
+                  {t('calendar.familyTips')}
+                </h2>
+                <p className="text-center text-gray-600 mb-6">
+                  {t('calendar.shareWith')}
+                </p>
+
+                {(() => {
+                  const currentDay = calendar.find(d => d.cycleDay === currentCycleDay);
+                  if (!currentDay) return null;
+                  
+                  const tips = getFamilyTips(currentDay.phase.name, language);
+                  const colors = getPhaseColor(currentDay.phase.name);
+                  const Icon = getPhaseIcon(currentDay.phase.name);
+
+                  return (
+                    <>
+                      <div className="flex items-center justify-center gap-4 mb-8 pb-6 border-b border-pink-300">
+                        <div className={`w-20 h-20 rounded-full border-4 ${colors.border} ${colors.bg} flex items-center justify-center`}>
+                          <Icon className={`w-12 h-12 ${colors.icon}`} />
+                        </div>
+                        <div>
+                          <h3 className={`text-2xl font-bold ${colors.text}`}>
+                            {currentDay.phase.displayName}
+                          </h3>
+                          <p className="text-gray-600">
+                            {language === 'es' ? 'Día' : 'Day'} {currentCycleDay} {language === 'es' ? 'del ciclo' : 'of cycle'}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-6 mb-8">
+                        {tips.map((tip, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="card p-6 border-l-4 border-gold bg-white hover:shadow-md transition-shadow"
+                          >
+                            <div className="flex items-start gap-4">
+                              <div className="text-5xl flex-shrink-0">{tip.icon}</div>
+                              <div className="flex-1">
+                                <h4 className="text-xl font-bold mb-2 text-charcoal">
+                                  {tip.title}
+                                </h4>
+                                <p className="text-gray-700 leading-relaxed">
+                                  {tip.tip}
+                                </p>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      <div className="relative">
+                        <button
+                          onClick={() => handleCopyTips(tips)}
+                          className="btn-primary w-full flex items-center justify-center gap-3 text-lg py-4"
+                        >
+                          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                          {t('calendar.copyTips')}
+                        </button>
+                        
+                        {showCopiedTooltip && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg"
+                          >
+                            ✓ {t('calendar.tipsCopied')}
+                          </motion.div>
+                        )}
+                      </div>
+                    </>
+                  );
+                })()}
+              </div>
+
+              <div className="disclaimer text-xs">
+                <p>
+                  {language === 'es' 
+                    ? 'Estos tips son orientativos basados en patrones hormonales promedio. Cada persona es única y puede experimentar variaciones.'
+                    : 'These tips are guidelines based on average hormonal patterns. Each person is unique and may experience variations.'}
+                </p>
+              </div>
             </div>
           )}
         </div>
