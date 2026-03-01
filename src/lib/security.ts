@@ -113,4 +113,20 @@ export class SessionManager {
       this.createSession(profileId);
     }
   }
+
+  // Active profile management
+  static setActiveProfile(profileId: string): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('phased_active_profile', profileId);
+  }
+
+  static getActiveProfile(): string | null {
+    if (typeof window === 'undefined') return null;
+    return localStorage.getItem('phased_active_profile');
+  }
+
+  static clearActiveProfile(): void {
+    if (typeof window === 'undefined') return;
+    localStorage.removeItem('phased_active_profile');
+  }
 }

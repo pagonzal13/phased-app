@@ -48,6 +48,7 @@ export default function ProfilePage() {
 
     SessionManager.createSession(selectedProfile);
     setShowPasswordModal(false);
+    SessionManager.setActiveProfile(selectedProfile);
 
     if (actionType === 'unlock') {
       router.push(`/calendar/${selectedProfile}`);
@@ -113,7 +114,12 @@ export default function ProfilePage() {
                     transition={{ delay: index * 0.1 }}
                     className="card-hover relative"
                   >
-                    <div className="flex items-start justify-between mb-4">
+                    {SessionManager.getActiveProfile() === profile.id && (
+                      <div className="absolute top-2 right-2 bg-gold text-charcoal px-2 py-1 text-xs font-bold uppercase rounded">
+                        {t('profile.active')}
+                      </div>
+                    )}
+                    <div className="flex items-start justify-between mb-4 mt-2">
                       <div>
                         <h3 className="text-2xl mb-1">{profile.name}</h3>
                         <p className="text-sm text-gray-500">
