@@ -48,6 +48,10 @@
   .divider {
     @apply h-px bg-gradient-to-r from-transparent via-gold to-transparent w-32;
   }
+
+  .opacity-2 {
+    opacity: 0.2;
+  }
 }
 
 @layer components {

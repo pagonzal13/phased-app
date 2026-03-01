@@ -214,47 +214,12 @@ export default function CalendarPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8"
           >
-            <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+            <div className="flex items-start justify-between mb-4 flex-wrap gap-4">
               <div>
                 <h1 className="text-4xl mb-2">{profile.name}</h1>
                 <p className="text-gray-600">
                   {language === 'es' ? 'Día' : 'Day'} {currentCycleDay} {t('common.of')} {profile.cycleLength} • {format(currentMonth, 'MMMM yyyy', { locale })}
                 </p>
-              </div>
-
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setShowUpdatePeriod(true)}
-                  className="btn-secondary flex items-center gap-2"
-                >
-                  <Edit3 className="w-4 h-4" />
-                  {language === 'es' ? 'Actualizar Período' : 'Update Period'}
-                </button>
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`px-4 py-2 ${viewMode === 'grid' ? 'btn-primary' : 'btn-secondary'}`}
-                >
-                  {t('calendar.grid')}
-                </button>
-                <button
-                  onClick={() => setViewMode('timeline')}
-                  className={`px-4 py-2 ${viewMode === 'timeline' ? 'btn-primary' : 'btn-secondary'}`}
-                >
-                  {t('calendar.timeline')}
-                </button>
-                <button
-                  onClick={() => setViewMode('family')}
-                  className={`px-4 py-2 ${viewMode === 'family' ? 'btn-primary' : 'btn-secondary'}`}
-                >
-                  {t('calendar.familyTips')}
-                </button>
-                <button
-                  onClick={() => setShowFertileDays(!showFertileDays)}
-                  className="btn-secondary flex items-center gap-2"
-                  title={showFertileDays ? t('calendar.hideFertileDays') : t('calendar.showFertileDays')}
-                >
-                  {showFertileDays ? '🌸' : '🌸'} {showFertileDays ? t('calendar.hideFertileDays') : t('calendar.showFertileDays')}
-                </button>
               </div>
             </div>
 
@@ -280,10 +245,52 @@ export default function CalendarPage() {
                 );
               })}
             </div>
+
+            <div className="flex gap-2 mb-2">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`px-4 py-2 ${viewMode === 'grid' ? 'btn-primary' : 'btn-secondary'}`}
+              >
+                {t('calendar.grid')}
+              </button>
+              <button
+                onClick={() => setViewMode('timeline')}
+                className={`px-4 py-2 ${viewMode === 'timeline' ? 'btn-primary' : 'btn-secondary'}`}
+              >
+                {t('calendar.timeline')}
+              </button>
+              <button
+                onClick={() => setViewMode('family')}
+                className={`px-4 py-2 ${viewMode === 'family' ? 'btn-primary' : 'btn-secondary'}`}
+              >
+                {t('calendar.familyTips')}
+              </button>
+            </div>
           </motion.div>
 
           {viewMode === 'grid' && (
             <>
+              {/* Config row — aligned left, icon-only, low profile */}
+              <div className="flex items-center gap-3 mb-3">
+                <button
+                  onClick={() => setShowUpdatePeriod(true)}
+                  title={language === 'es' ? 'Actualizar período' : 'Update period'}
+                  className="p-2 text-gray-500 hover:text-gold hover:bg-gold/10 rounded-full transition-all"
+                >
+                  <Edit3 className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setShowFertileDays(!showFertileDays)}
+                  title={showFertileDays ? t('calendar.hideFertileDays') : t('calendar.showFertileDays')}
+                  className={`p-2 rounded-full transition-all ${
+                    showFertileDays
+                      ? 'text-pink-600 bg-pink-100 hover:bg-pink-200'
+                      : 'text-gray-400 hover:text-pink-500 hover:bg-pink-50'
+                  }`}
+                >
+                  <span className="text-lg">🤰</span>
+                </button>
+              </div>
               {/* Month navigation */}
               <div className="flex items-center justify-between mb-4">
                 <button
@@ -342,42 +349,50 @@ export default function CalendarPage() {
                         setSelectedDay(cycleDay);
                         setModalView('details');
                       }}
-                      className={`aspect-square border-2 ${colors.border} ${colors.bg} p-2 transition-all ${
-                        isToday ? 'ring-4 ring-gold ring-offset-2' : ''
-                      } hover:shadow-lg relative`}
+                      className={`aspect-square border-2 p-2 transition-all hover:shadow-lg relative
+                                  ${`${colors.border} ${colors.bg}`}
+                                  ${isToday ? 'ring-4 ring-gold ring-offset-2' : ''}
+                                  ${isPeriodStart ? 'ring-4 ring-light-burgundy ring-offset-2' : ''}
+                                `}
                     >
                       <div className="flex flex-col h-full">
                         {/* Day of month - PROMINENT */}
-                        <div className="text-2xl font-bold mb-1">{format(date, 'd')}</div>
+                        <div className={`text-2xl font-bold mb-1 ${isPeriodStart ? 'text-light-burgundy' : ''}`}>
+                          {format(date, 'd')}
+                        </div>
                         
                         {/* Icon */}
-                        <div className="flex-1 flex items-center justify-center">
-                          <Icon className={`w-6 h-6 ${colors.icon}`} />
+                        <div className="flex-1 flex items-center justify-center opacity-2">
+                          <Icon className={`w-20 h-20 ${colors.icon}`} />
                         </div>
                         
                         {/* Cycle day - SMALL */}
-                        <div className="text-xs text-gray-600 mt-1">
+                        <div className={`text-xs mt-1 ${isPeriodStart ? 'text-red-100' : 'text-gray-600'}`}>
                           {language === 'es' ? 'Día' : 'Day'} {cycleDay.cycleDay} {language === 'es' ? 'del ciclo' : 'of the cycle'}
                         </div>
                       </div>
+
                       {isToday && (
                         <div className="absolute top-1 right-1">
                           <Circle className="w-2 h-2 fill-gold text-gold" />
                         </div>
                       )}
+
                       {isPeriodStart && (
-                        <div className="absolute top-1 left-1">
-                          <div className="w-2 h-2 bg-red-600 rounded-full" title={t('calendar.periodStart')}></div>
+                        <div className="absolute top-1 inset-x-0 flex justify-left">
+                          <span className="text-lg drop-shadow">🩸</span>
                         </div>
                       )}
+
                       {isOvulationDay && (
-                        <div className="absolute bottom-1 right-1">
-                          <span className="text-xs" title={t('calendar.ovulationDay')}>🥚</span>
+                        <div className="absolute inset-0 flex items-start justify-left pb-1 pointer-events-none">
+                          <span className="text-xl drop-shadow">🥚</span>
                         </div>
                       )}
+
                       {isFertileWindow && !isOvulationDay && (
-                        <div className="absolute bottom-1 left-1">
-                          <span className="text-xs opacity-60" title={t('calendar.fertileWindow')}>🌸</span>
+                        <div className="absolute inset-0 flex items-start justify-left pb-1 pointer-events-none">
+                          <span className="text-base drop-shadow opacity-80">🤰</span>
                         </div>
                       )}
                     </motion.button>
@@ -392,6 +407,7 @@ export default function CalendarPage() {
               {calendar.map((day) => {
                 const dayDate = getDayDate(day);
                 const isToday = day.cycleDay === currentCycleDay;
+                const isPeriodStart = day?.phase.isBleeding && day.cycleDay === 1;
                 const colors = getPhaseColor(day.phase.name);
                 const Icon = getPhaseIcon(day.phase.name);
 
@@ -415,7 +431,7 @@ export default function CalendarPage() {
                       </div>
 
                       <div className="flex-shrink-0 text-center min-w-[100px]">
-                        <div className="text-3xl font-bold">{format(dayDate, 'd')}</div>
+                        <div className={`text-3xl font-bold ${isPeriodStart ? 'text-light-burgundy' : ''}`}>{format(dayDate, 'd')}</div>
                         <div className="text-sm text-gray-600">
                           {format(dayDate, 'EEEE', { locale })}
                         </div>
@@ -426,7 +442,7 @@ export default function CalendarPage() {
                           {language === 'es' ? 'Día' : 'Day'} {day.cycleDay} {language === 'es' ? 'del ciclo' : 'of cycle'}
                           {day.phase.isBleeding && day.cycleDay === 1 && (
                             <div className="text-xs text-red-600 font-bold mt-1">
-                              🔴 {t('calendar.periodStart')}
+                              🩸 {t('calendar.periodStart')}
                             </div>
                           )}
                           {showFertileDays && day.phase.isOvulation && (
@@ -436,7 +452,7 @@ export default function CalendarPage() {
                           )}
                           {showFertileDays && day.phase.isFertile && !day.phase.isOvulation && (
                             <div className="text-xs text-pink-600 mt-1">
-                              🌸 {t('calendar.fertileWindow')}
+                              🤰 {t('calendar.fertileWindow')}
                             </div>
                           )}
                         </div>

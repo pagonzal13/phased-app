@@ -13,6 +13,7 @@ module.exports = {
         gold: '#B8985F',
         'soft-gray': '#E8E6E3',
         'deep-burgundy': '#6B3E4A',
+        'light-burgundy': '#d92e5c',
       },
       fontFamily: {
         serif: ['Playfair Display', 'Georgia', 'serif'],
